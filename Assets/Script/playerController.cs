@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    const int MinLane = -2;
-    const int MaxLane = 2;
-    const float LaneWidth = 1.0f;
+    const int MinLane = -1;
+    const int MaxLane = 1;
+    const float LaneWidth = 3.0f;
 
     CharacterController controller;
     Animator animator;
@@ -73,5 +73,18 @@ public class playerController : MonoBehaviour
     {
         if (controller.isGrounded)
             moveDirection.y = speedJump;
+    }
+
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.gameObject.CompareTag("Danger"))
+        {
+            controller.Move(new Vector3(0,5,0));
+            controller.transform.Rotate(Random.Range(-45, 45), Random.Range(-45, 45), Random.Range(-45, 45));
+
+            GameController.gameState = GameState.gameover;
+            Destroy(gameObject, 3.0f);
+        }
     }
 }

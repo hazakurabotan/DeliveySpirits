@@ -30,13 +30,17 @@ public class StageGenerator : MonoBehaviour
 
     void Update()
     {
- 
-        int charaPositionIndex = (int)(player.position.z / StageChipSize);
 
-        //次のステージにはいっあらstageのこうしんしょりをおこうんまう
-        if (charaPositionIndex + perInstantiate > currentChipIndex)
+        if (player != null)
         {
-            UpdateStage(charaPositionIndex + perInstantiate);
+
+            int charaPositionIndex = (int)(player.position.z / StageChipSize);
+
+            //次のステージにはいっあらstageのこうしんしょりをおこうんまう
+            if (charaPositionIndex + perInstantiate > currentChipIndex)
+            {
+                UpdateStage(charaPositionIndex + perInstantiate);
+            }
         }
     }
 
